@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Platforms
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2847419941
+    locked: 0
+  - name: Platforms
+    uniqueID: 4102751119
+    locked: 0
+  - name: Props
+    uniqueID: 2505788067
     locked: 0
