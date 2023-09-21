@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Platforms
+  - Backgrounds
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Background
   - 
   - 
   - 
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Props
     uniqueID: 2505788067
+    locked: 0
+  - name: Player
+    uniqueID: 2522014059
     locked: 0

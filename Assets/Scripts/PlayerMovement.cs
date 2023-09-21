@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnMove(InputValue value)
     {
+        
         moveDirection = value.Get<float>();
+        Debug.Log(moveDirection);
     }
 
     private void OnJump(InputValue value)
@@ -49,8 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Run();
         FlipSprite();
-        Debug.Log(isInTheAir);
-        Debug.Log((Mathf.Abs(rb.velocity.y) < Mathf.Epsilon));
+
         if (isInTheAir && (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon))
         {
             // Estoy en el punto mas alto del salto
@@ -73,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
+        Debug.Log(moveDirection);
         if (moveDirection == 0f)
         {
             animator.SetBool("IsRunning", false);
@@ -90,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.transform.CompareTag("Platform"))
+        if (other.transform.CompareTag("Platforms"))
         {
             // Finalizo el salto
             animator.SetBool("IsJumping", false);
