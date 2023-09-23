@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (value.isPressed)
         {
+            Debug.Log("AAA");
             if (capsuleCollider.IsTouchingLayers(
                 LayerMask.GetMask("Ground"))
             ){
