@@ -47,6 +47,9 @@ TagManager:
   - name: Background
     uniqueID: 2847419941
     locked: 0
+  - name: Back Decos
+    uniqueID: 1520373877
+    locked: 0
   - name: Platforms
     uniqueID: 4102751119
     locked: 0
