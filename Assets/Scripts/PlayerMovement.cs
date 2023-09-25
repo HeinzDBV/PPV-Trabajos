@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.WebSockets;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,12 +7,15 @@ public class PlayerMovement : MonoBehaviour
     private float runSpeed = 2f;
     [SerializeField]
     private float jumpSpeed = 4f;
-
     private float moveDirection = 0f;
+
     public bool isInTheAir = true;
+
     private Rigidbody2D rb;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider;
+
+
 
     private void Start() 
     {
@@ -47,17 +46,40 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    private void OnJump2()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("AAA");
+            if (capsuleCollider.IsTouchingLayers(
+                LayerMask.GetMask("Ground"))
+            ){
+                // Saltar
+                animator.SetBool("IsJumping", true);
+                rb.velocity += new Vector2(0f, jumpSpeed);
+                isInTheAir = true;
+            }
+        }
+    }
+    private void Dashtp()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && moveDirection != 0)
+        {
+            transform.position += new Vector3(moveDirection * 2f,0,0);
+        }
+    }
     private void Update()
     {
         Run();
         FlipSprite();
+        OnJump2();
+        Dashtp();
 
         if (isInTheAir && (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon))
         {
             // Estoy en el punto mas alto del salto
             Debug.Log("Entra");
-            rb.gravityScale = 2f;
+            rb.gravityScale = 5f;
         }
     }
 
