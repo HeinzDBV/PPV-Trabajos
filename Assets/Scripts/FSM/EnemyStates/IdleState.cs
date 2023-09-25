@@ -13,11 +13,16 @@ public class IdleState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        enemy.StartCoroutine(IdleTimer(3f));
+        enemy.StartCoroutine(IdleTimer(2f));
     }
 
     public override void FrameUpdate()
     {
+        if (enemy.IsAggroed)
+        {
+            stateMachine.ChangeState(enemy.ChaseState);
+        }
+
         if (idle)
         {
             Idle();
@@ -39,7 +44,7 @@ public class IdleState : EnemyState
     {
         idle = false;
         enemy.Move();
-        enemy.IsThereEdge();
+        enemy.CheckEdge();
         enemy.ChangeAnimationState("Walking");
     }
 
@@ -61,6 +66,8 @@ public class IdleState : EnemyState
     public override void ExitState()
     {
         base.ExitState();
+        enemy.StopAllCoroutines();
+        Idle();
     }
 
 }

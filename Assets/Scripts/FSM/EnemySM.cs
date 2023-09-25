@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EnemySM
 {
-    public EnemyState currentState { get; set; }
+    public EnemyState CurrentState { get; set; }
 
     public void Initialize(EnemyState startingState)
     {
-        currentState = startingState;
-        currentState.EnterState();
+        CurrentState = startingState;
+        CurrentState.EnterState();
     }
 
     public void ChangeState(EnemyState newState)
     {
-        currentState.ExitState();
-        currentState = newState;
-        currentState.EnterState();
+        CurrentState.ExitState();
+        CurrentState = newState;
+        CurrentState.EnterState();
     }
 }

@@ -11,11 +11,16 @@ public class HurtState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.ChangeAnimationState("Hurt");
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            stateMachine.ChangeState(enemy.IdleState);
+        }
     }
 
     public override void ExitState()
