@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
-    Animator animator;
+    #region Components
+    public Animator animator;
+    public Rigidbody2D rb;
+    public Transform groundDetection;
+    #endregion
     private string currentState;
 
     [SerializeField]
@@ -22,6 +26,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     #region IdleVariables
     public float Speed = 5f;
+    public float direction = 1f;
     #endregion
 
     void Awake()
@@ -40,7 +45,56 @@ public class EnemyController : MonoBehaviour, IDamageable
     void Start()
     {
         animator = GetComponent<Animator>();
+        currentState = "Idle";
+        rb = GetComponent<Rigidbody2D>();
+        groundDetection = transform.Find("GroundCheck");
+        
         CurrentHealth = MaxHealth;
+    }
+
+    public void Move()
+    {
+        rb.velocity = new Vector2(Speed * direction, rb.velocity.y);
+        
+        if (direction == 1)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction == -1)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    public void Stop()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
+    public void IsThereEdge()
+    {
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        
+        Debug.Log(groundInfo.collider);
+        if (!groundInfo.collider)
+        {
+            // Change direction when no ground is detected
+            ChangeDirection();
+            Debug.Log("No ground");
+        }
+
+    }
+
+    public void ChangeDirection()
+    {
+        if (transform.localScale.x == 1)
+        {
+            direction = -1;
+        }
+        else if (transform.localScale.x == -1)
+        {
+            direction = 1;
+        }
     }
 
     public void ChangeAnimationState(string newState)

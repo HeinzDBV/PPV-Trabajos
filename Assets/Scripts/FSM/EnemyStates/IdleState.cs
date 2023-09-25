@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class IdleState : EnemyState
 {
-    public Vector3 targetPosition;
-    public Vector3 direction;
-    
+    public bool idle = true;
+
     public IdleState(EnemyController enemy, EnemySM stateMachine) : base(enemy, stateMachine)
     {
     }
@@ -14,15 +13,54 @@ public class IdleState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.StartCoroutine(IdleTimer(3f));
     }
 
     public override void FrameUpdate()
     {
-        base.FrameUpdate();
+        if (idle)
+        {
+            Idle();
+        }
+        else
+        {
+            Walking();
+        }
+    }
+
+    public void Idle()
+    {
+        idle = true;
+        enemy.Stop();
+        enemy.ChangeAnimationState("Idle");
+    }
+
+    public void Walking()
+    {
+        idle = false;
+        enemy.Move();
+        enemy.IsThereEdge();
+        enemy.ChangeAnimationState("Walking");
+    }
+
+    public IEnumerator IdleTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (idle)
+        {
+            idle = false;
+            enemy.StartCoroutine(IdleTimer(Random.Range(4f, 8f)));
+        }
+        else
+        {
+            idle = true;
+            enemy.StartCoroutine(IdleTimer(Random.Range(2f, 4f)));
+        }
     }
 
     public override void ExitState()
     {
         base.ExitState();
     }
+
 }

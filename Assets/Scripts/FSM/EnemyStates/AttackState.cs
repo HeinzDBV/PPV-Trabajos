@@ -11,6 +11,7 @@ public class AttackState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
+        enemy.animator.Play("Attack");
     }
 
     public override void FrameUpdate()

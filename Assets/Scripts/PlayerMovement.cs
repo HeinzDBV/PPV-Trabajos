@@ -75,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        Debug.Log(moveDirection);
         if (moveDirection == 0f)
         {
             animator.SetBool("IsRunning", false);
