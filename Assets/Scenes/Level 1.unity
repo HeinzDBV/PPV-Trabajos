@@ -544,7 +544,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cddbec1ec795e94459a8fb814a05d2e9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -642,7 +642,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 2.6666667, y: 2.6666667}
     newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -23659,7 +23659,7 @@ SpriteRenderer:
   m_SortingLayerID: -1772953237
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 340622456, guid: 78bdbe46e129c5e4f9390452fc4a3fca, type: 3}
+  m_Sprite: {fileID: 1010036236, guid: cdc28ec37f689144893d4c76a77c6309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -23765,8 +23765,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7518425, y: -0.94573593}
-  m_Size: {x: 1.6257629, y: 2.1085281}
+  m_Offset: {x: -0.17069721, y: -0.22737575}
+  m_Size: {x: 1.4966183, y: 2.27148}
   m_Direction: 0
 --- !u!1 &1119634281
 GameObject:
