@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Background
   - Ground
-  - 
+  - Wall
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2522014059
+    locked: 0
+  - name: Walls
+    uniqueID: 3543179485
     locked: 0
