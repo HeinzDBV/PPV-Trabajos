@@ -51,24 +51,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void OnJump2()
+    private void OnTeleport(InputValue value)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("AAA");
-            if (capsuleCollider.IsTouchingLayers(
-                LayerMask.GetMask("Ground"))
-            ){
-                // Saltar
-                animator.SetBool("IsJumping", true);
-                rb.velocity += new Vector2(0f, jumpSpeed);
-                isInTheAir = true;
-            }
-        }
-    }
-    private void Dashtp()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && moveDirection != 0)
+        if (value.isPressed && moveDirection != 0)
         {
             transform.position += new Vector3(moveDirection * 2f,0,0);
         }
@@ -77,8 +62,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Run();
         FlipSprite();
-        OnJump2();
-        Dashtp();
         WallSlide();
 
         if (isInTheAir && (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon))
@@ -125,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
             // Finalizo el salto
             animator.SetBool("IsJumping", false);
             isInTheAir = false;
-            rb.gravityScale = 1f;
+            rb.gravityScale = 5f;
         }
     }
 

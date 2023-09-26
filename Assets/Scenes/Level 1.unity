@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 7
-  jumpSpeed: 7.5
+  jumpSpeed: 20
   wallCheck: {fileID: 377673732}
   wallLayer:
     serializedVersion: 2
@@ -543,7 +543,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 6200000, guid: cddbec1ec795e94459a8fb814a05d2e9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
