@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpSpeed = 4f;
     private float moveDirection = 0f;
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 2f;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
 
     public bool isInTheAir = true;
 
@@ -74,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         OnJump2();
         Dashtp();
+        WallSlide();
 
         if (isInTheAir && (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon))
         {
@@ -97,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        if (moveDirection == 0f)
+        if (moveDirection == 0f || isWallSliding)
         {
             animator.SetBool("IsRunning", false);
         }
@@ -120,6 +126,24 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", false);
             isInTheAir = false;
             rb.gravityScale = 1f;
+        }
+    }
+
+    private bool isWalled(){
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide(){
+        if(isWalled() ){
+            
+            animator.SetBool("IsWallSliding", true);
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            Debug.Log("WallSliding");
+        }
+        else{
+            isWallSliding = false;
+            animator.SetBool("IsWallSliding", false);
         }
     }
 }
