@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour , IDamageable
     private bool canDoubleJump;
     private bool canWallSlide;
     private bool isWallSliding;
-    private PlayerHealth playerHealth;
+    public PlayerHealth playerHealth;
     
 
 
@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour , IDamageable
     private bool facingRight = true;
     private float movingInput;
 
-    public float MaxHealth { get; set;   } = 100;
-    public float CurrentHealth { get; set;  }
+    public float MaxHealth { get; set; } = 100;
+    public float CurrentHealth { get; set; }
 
     void Start()
     {

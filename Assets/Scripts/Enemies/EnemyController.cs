@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
     public Rigidbody2D rb;
     public Transform groundDetection;
     public Rigidbody2D bulletPrefab;
+    public EnemyHealth enemyHealth;
     #endregion
     private string currentState;
 
@@ -52,6 +53,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
         rb = GetComponent<Rigidbody2D>();
         groundDetection = transform.Find("GroundCheck");
         bulletPrefab = Resources.Load<Rigidbody2D>("Prefabs/EnemyBullet");
+        enemyHealth.SetMaxHealth(MaxHealth);
         
         CurrentHealth = MaxHealth;
     }
@@ -63,10 +65,12 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
         if (direction == 1)
         {
             transform.localScale = new Vector3(1, 1, 1);
+            enemyHealth.ChangeDirection(1);
         }
         else if (direction == -1)
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            enemyHealth.ChangeDirection(-1);
         }
     }
 
@@ -111,11 +115,13 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
         {
             direction = 1;
             transform.localScale = new Vector3(1, 1, 1);
+            enemyHealth.ChangeDirection(1);
         }
         else if (value == -1)
         {
             direction = -1;
             transform.localScale = new Vector3(-1, 1, 1);
+            enemyHealth.ChangeDirection(-1);
         }
     }
 
@@ -124,10 +130,12 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
         if (transform.localScale.x == 1)
         {
             direction = -1;
+            enemyHealth.ChangeDirection(-1);
         }
         else if (transform.localScale.x == -1)
         {
             direction = 1;
+            enemyHealth.ChangeDirection(1);
         }
     }
 
@@ -154,6 +162,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
     public void Damage(float damage)
     {
         CurrentHealth -= damage;
+        enemyHealth.SetHealth(CurrentHealth);
         StateMachine.ChangeState(HurtState);
         if (CurrentHealth <= 0)
         {

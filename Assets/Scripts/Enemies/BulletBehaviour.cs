@@ -21,7 +21,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("a");
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<IDamageable>().Damage(damage);
