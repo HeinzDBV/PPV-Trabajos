@@ -161,6 +161,7 @@ public class EnemyController : MonoBehaviour, IDamageable, ITriggerCheckable
 
     public void Damage(float damage)
     {
+        Debug.Log("Enemy damaged");
         CurrentHealth -= damage;
         enemyHealth.SetHealth(CurrentHealth);
         StateMachine.ChangeState(HurtState);

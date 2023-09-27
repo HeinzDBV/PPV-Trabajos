@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour , IDamageable
     private bool canWallSlide;
     private bool isWallSliding;
     public PlayerHealth playerHealth;
+    public Rigidbody2D bulletPrefab;
+    public Transform point;
     
 
 
@@ -120,6 +122,15 @@ public class PlayerMovement : MonoBehaviour , IDamageable
     {
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+    }
+
+    public void OnAttack(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Rigidbody2D bullet = GameObject.Instantiate(bulletPrefab, point.transform.position, Quaternion.identity).GetComponent<Rigidbody2D>();
+            bullet.velocity = new Vector2((facingRight ? 1 : -1) * 20, 0);
+        }
     }
 
     private void FlipController()
