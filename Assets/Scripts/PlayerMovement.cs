@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour , IDamageable
 
     private void checkInput(){
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if ((Input.GetKeyDown(KeyCode.UpArrow) && PauseMenu.isPaused != true) || (Input.GetKeyDown(KeyCode.Space) && PauseMenu.isPaused != true))
             JumpButton();
             if(canMove)
              movingInput = Input.GetAxisRaw("Horizontal");
@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour , IDamageable
 
     private void OnTeleport(InputValue value)
     {
-        if (value.isPressed && rb.velocity.x >0 && PauseMenu.isPaused == true)
+        if (value.isPressed && rb.velocity.x >0 )
         {
             transform.position = new Vector2(rb.position.x + 2f, rb.position.y);
         }

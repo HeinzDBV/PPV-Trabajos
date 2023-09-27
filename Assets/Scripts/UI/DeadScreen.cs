@@ -20,11 +20,13 @@ public Slider slider;
         if(slider.value <= 0)
         {
             Invoke("PauseGame", 1f);
+            
         }
     }
 
     public void PauseGame()
     {
         deadScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
