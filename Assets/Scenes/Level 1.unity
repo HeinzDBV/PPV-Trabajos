@@ -613,7 +613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 208703428}
   rb: {fileID: 208703432}
-  speed: 5
+  Background: {fileID: 518912327}
+  speed: 7
   jumpForce: 16
   groundCheck: {fileID: 1142274057}
   groundCheckRadius: 0.4
@@ -665,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 602792565}
 --- !u!1 &268887411
 GameObject:
   m_ObjectHideFlags: 0
@@ -24982,7 +24983,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -25020,7 +25021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1579610062}
-  isPaused: 0
 --- !u!1 &1114900895
 GameObject:
   m_ObjectHideFlags: 0
@@ -31909,3 +31909,4 @@ SceneRoots:
   - {fileID: 804396884}
   - {fileID: 1572865397}
   - {fileID: 1114900898}
+  - {fileID: 395951550}

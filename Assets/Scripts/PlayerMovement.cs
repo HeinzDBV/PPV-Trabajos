@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour , IDamageable
     public Animator anim;
     public Rigidbody2D rb;
 
+    public GameObject Background;
+
     [Header("Movement Info")]
     [SerializeField] private float speed = 5;
     [SerializeField] private float jumpForce = 12;
@@ -46,7 +48,6 @@ public class PlayerMovement : MonoBehaviour , IDamageable
 
     void Update()
     {
-
         checkInput();
         CollisionCheck();
         AnimatorController();
@@ -141,7 +142,7 @@ public class PlayerMovement : MonoBehaviour , IDamageable
 
     private void OnTeleport(InputValue value)
     {
-        if (value.isPressed && rb.velocity.x >0)
+        if (value.isPressed && rb.velocity.x >0 && PauseMenu.isPaused == true)
         {
             transform.position = new Vector2(rb.position.x + 2f, rb.position.y);
         }

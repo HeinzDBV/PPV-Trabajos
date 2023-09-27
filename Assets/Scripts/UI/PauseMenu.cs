@@ -3,12 +3,12 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
 public GameObject pauseMenu;
-
-public bool isPaused;
+public static bool isPaused;
 
     // Start is called before the first frame update
     void Start()
     {
+        isPaused = false;
         pauseMenu.SetActive(false);
     }
 

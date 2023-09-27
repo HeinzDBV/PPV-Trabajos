@@ -14,7 +14,8 @@ public class PlayerHealth : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
     }
 
-    void Update(){
+    void Update()
+    {
         
     }
 
