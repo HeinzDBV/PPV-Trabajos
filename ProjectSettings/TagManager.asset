@@ -10,6 +10,7 @@ TagManager:
   - Button
   - Deadground
   - Enemy
+  - Deadtrigger
   layers:
   - Default
   - TransparentFX
