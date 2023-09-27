@@ -1,132 +1,199 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour , IDamageable
 {
-    [SerializeField]
-    private float runSpeed = 2f;
-    [SerializeField]
-    private float jumpSpeed = 4f;
-    private float moveDirection = 0f;
+    public Animator anim;
+    public Rigidbody2D rb;
+
+    [Header("Movement Info")]
+    [SerializeField] private float speed = 5;
+    [SerializeField] private float jumpForce = 12;
+
+    private bool canMove = true;
+    private bool canDoubleJump;
+    private bool canWallSlide;
     private bool isWallSliding;
-    private float wallSlidingSpeed = 2f;
+    private PlayerHealth playerHealth;
+    
+
+
+    [Header("Collision Info")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private bool isGrounded;
+
     [SerializeField] private Transform wallCheck;
-    [SerializeField] private LayerMask wallLayer;
-
-    public bool isInTheAir = true;
-
-    private Rigidbody2D rb;
-    private Animator animator;
-    private CapsuleCollider2D capsuleCollider;
+    [SerializeField] private float wallCheckDistance;
+    [SerializeField] private bool isWallDetected;
 
 
+    private bool facingRight = true;
+    private float movingInput;
 
-    private void Start() 
+    public float MaxHealth { get; set;   } = 100;
+    public float CurrentHealth { get; set;  }
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
-        animator = GetComponent<Animator>();
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        CurrentHealth = MaxHealth;
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnMove(InputValue value)
+    void Update()
     {
-        
-        moveDirection = value.Get<float>();
-        Debug.Log(moveDirection);
+
+        checkInput();
+        CollisionCheck();
+        AnimatorController();
+        FlipController();
     }
 
-    private void OnJump(InputValue value)
+    private void JumpButton()
     {
-        if (value.isPressed)
+        if (isGrounded)
+            Jump();
+        else if (canDoubleJump)
         {
-            Debug.Log("AAA");
-            if (capsuleCollider.IsTouchingLayers(
-                LayerMask.GetMask("Ground"))
-            ){
-                // Saltar
-                animator.SetBool("IsJumping", true);
-                rb.velocity += new Vector2(0f, jumpSpeed);
-                isInTheAir = true;
-            }
-        }
-    }
-    private void OnTeleport(InputValue value)
-    {
-        if (value.isPressed && moveDirection != 0)
-        {
-            transform.position += new Vector3(moveDirection * 2f,0,0);
-        }
-    }
-    private void Update()
-    {
-        Run();
-        FlipSprite();
-        WallSlide();
-
-        if (isInTheAir && (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon))
-        {
-            // Estoy en el punto mas alto del salto
-            Debug.Log("Entra");
-            rb.gravityScale = 5f;
-        }
-    }
-
-    private void FlipSprite()
-    {
-        if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon)
-        {
-            transform.localScale = new Vector3(
-                Mathf.Sign(rb.velocity.x),
-                1f,
-                1f
-            );
-        }
-    }
-
-    private void Run()
-    {
-        if (moveDirection == 0f || isWallSliding)
-        {
-            animator.SetBool("IsRunning", false);
-        }
-        else
-        {
-            animator.SetBool("IsRunning", true);
-        }
-
-        rb.velocity = new Vector2(
-            runSpeed * moveDirection,
-            rb.velocity.y
-        );
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) 
-    {
-        if (other.transform.CompareTag("Platforms"))
-        {
-            // Finalizo el salto
-            animator.SetBool("IsJumping", false);
-            isInTheAir = false;
-            rb.gravityScale = 5f;
-        }
-    }
-
-    private bool isWalled(){
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
-    }
-
-    private void WallSlide(){
-        if(isWalled() ){
+            canDoubleJump = false;
+            Jump();
             
-            animator.SetBool("IsWallSliding", true);
+        }
+        else if(isWallSliding){
+            canDoubleJump = true;
+            Jump();
+        }
+        Debug.Log("isGrounded: ");
+        Debug.Log(isGrounded);
+        Debug.Log("canDoubleJump: ");
+        Debug.Log(canDoubleJump);
+    }
+
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private void FixedUpdate()
+    {
+        if(isGrounded){
+            canDoubleJump = true;
+        }
+
+        if(isWallDetected && canWallSlide){
             isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
-            Debug.Log("WallSliding");
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.1f);
         }
         else{
             isWallSliding = false;
-            animator.SetBool("IsWallSliding", false);
+            Move();
         }
+        
+    }
+
+    private void checkInput(){
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            JumpButton();
+            if(canMove)
+             movingInput = Input.GetAxisRaw("Horizontal");
+    }
+
+    private void Move()
+    {
+        if (canMove)
+        {
+            rb.velocity = new Vector2(movingInput * speed, rb.velocity.y);
+        }
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
+    }
+
+    private void FlipController()
+    {
+        if(isGrounded && isWallDetected ){
+            if(facingRight && movingInput<0){
+                Flip();
+            }
+            else if(!facingRight && movingInput>0){
+                Flip();
+            }
+        }
+        
+        if (rb.velocity.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (rb.velocity.x < 0 && facingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void OnTeleport(InputValue value)
+    {
+        if (value.isPressed && rb.velocity.x >0)
+        {
+            transform.position = new Vector2(rb.position.x + 2f, rb.position.y);
+        }
+        else if(value.isPressed && rb.velocity.x < 0){
+            transform.position = new Vector2(rb.position.x - 2f, rb.position.y);
+        }
+    }
+
+
+    private void AnimatorController()
+
+    {
+        bool isMoving = rb.velocity.x != 0;
+        anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("IsMoving", isMoving);
+        anim.SetBool("IsWallSliding", isWallSliding);
+    }
+
+    private void CollisionCheck()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        isWallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right,wallCheckDistance, whatIsGround);
+
+
+      
+        if(!isGrounded && rb.velocity.y < 0)
+            canWallSlide = true;
+        else{
+            canWallSlide = false;
+        }  
+    }
+    
+
+/*Para verlo en Unity*/
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
+
+    }
+
+    public void Damage(float damage)
+    {
+        CurrentHealth -= damage;
+        playerHealth.SetHealth(CurrentHealth);
+        if(CurrentHealth <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        
     }
 }
