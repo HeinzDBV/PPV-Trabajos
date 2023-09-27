@@ -24,18 +24,11 @@ public class AttackBossState : EnemyState
         base.EnterState();
         Debug.Log("Enter Attack State");
         enemy.ChangeAnimationState("Idle");
-        enemy.Stop();
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-
-        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !enemy.animator.IsInTransition(0) && enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            enemy.ChangeAnimationState("Idle");
-        }
-        enemy.Stop();
 
         if (_timer > _timeBetweenShots)
         {

@@ -7,15 +7,20 @@ public class BossController : MonoBehaviour
     #region Components
     public Animator animator;
     public Rigidbody2D rb;
-    public Transform groundDetection;
     public Rigidbody2D bulletPrefab;
     public EnemyHealth enemyHealth;
+
+    public Transform point1;
+    public Transform point2;
+    public Transform point3;
+    public LayerMask enemy;
     #endregion
     private string currentState;
 
     [SerializeField]
     public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
+    public float bulletSpeed = 10f;
 
     #region StateMachineVariables
     public EnemySM StateMachine { get; set; }
@@ -37,11 +42,11 @@ public class BossController : MonoBehaviour
     void Awake()
     {
         StateMachine = new EnemySM();
+        SleepState = new SleepState(this, StateMachine);
         IdleState = new IdleBossState(this, StateMachine);
         AttackState = new AttackBossState(this, StateMachine);
         DeathState = new DeathBossState(this, StateMachine);
         HurtState = new HurtBossState(this, StateMachine);
-        SleepState = new SleepState(this, StateMachine);
 
         StateMachine.Initialize(SleepState);
     }
@@ -50,12 +55,11 @@ public class BossController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        currentState = "Idle";
         rb = GetComponent<Rigidbody2D>();
-        groundDetection = transform.Find("GroundCheck");
-        bulletPrefab = Resources.Load<Rigidbody2D>("Prefabs/EnemyBullet");
+        bulletPrefab = Resources.Load<Rigidbody2D>("Prefabs/BossBullet");
         enemyHealth.SetMaxHealth(MaxHealth);
         
+        currentState = "Idle";
         CurrentHealth = MaxHealth;
     }
 
@@ -85,29 +89,32 @@ public class BossController : MonoBehaviour
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
-    public void CheckEdge()
+    public void LookAtTarget(Transform target)
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
-        
-        if (!groundInfo.collider)
+        if (target.position.x > transform.position.x)
         {
-            // Change direction when no ground is detected
-            ChangeDirection();
+            direction = 1;
+            transform.localScale = new Vector3(1, 1, 1);
+            enemyHealth.ChangeDirection(1);
         }
-
+        else if (target.position.x < transform.position.x)
+        {
+            direction = -1;
+            transform.localScale = new Vector3(-1, 1, 1);
+            enemyHealth.ChangeDirection(-1);
+        }
     }
 
-    public bool IsThereEdge()
+    public void Flip()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
-        
-        if (!groundInfo.collider)
-        {
-            // Change direction when no ground is detected
-            return true;
-        }
+        direction *= -1;
+        transform.localScale = new Vector3(transform.localScale.x * direction, 1, 1);
+    }
 
-        return false;
+    public void Flip(int value)
+    {
+        direction = value;
+        transform.localScale = new Vector3(transform.localScale.x * direction, 1, 1);
     }
 
     public void ChangeDirection(int value)
@@ -184,5 +191,10 @@ public class BossController : MonoBehaviour
     public void SetInAttackRange(bool value)
     {
         IsInAttackRange = value;
+    }
+
+    public void OnTriggerEnter2DFunc(Collider2D other)
+    {
+        StateMachine.CurrentState.OnTriggerEnter(other);
     }
 }

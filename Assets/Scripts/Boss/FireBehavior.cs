@@ -8,10 +8,12 @@ public class FireBehavior : MonoBehaviour
     public bool damaged = true;
 
     private Animator _animator;
+    public Rigidbody2D rb;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {

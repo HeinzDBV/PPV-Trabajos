@@ -11,6 +11,15 @@ public class SleepState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        //boss.ChangeAnimationState("Sleep");
+        Debug.Log("Sleeping");
+    }
+
+    public override void OnTriggerEnter(Collider2D other)
+    {
+        base.OnTriggerEnter(other);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            stateMachine.ChangeState(boss.IdleState);
+        }
     }
 }

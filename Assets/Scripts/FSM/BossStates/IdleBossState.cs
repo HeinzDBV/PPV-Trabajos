@@ -4,69 +4,72 @@ using UnityEngine;
 
 public class IdleBossState : EnemyState
 {
-    public bool idle = true;
+    public int attack = 0;
 
-    public IdleBossState(BossController enemy, EnemySM stateMachine) : base(enemy, stateMachine)
+    public float attackTimer = 0f;
+    public float attackCooldown = 3f;
+    public Transform _playerTransform;
+
+    public IdleBossState(BossController boss, EnemySM stateMachine) : base(boss, stateMachine)
     {
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        enemy.StartCoroutine(IdleTimer(2f));
+        Debug.Log("Enter Idle State");
     }
 
     public override void FrameUpdate()
     {
-        if (enemy.IsAggroed)
-        {
-            stateMachine.ChangeState(enemy.ChaseState);
-        }
 
-        if (idle)
+        if (attackTimer > attackCooldown)
         {
-            Idle();
+            attackTimer = 0;
+            attack = Random.Range(0, 3);
+            Attack(attack);
         }
         else
         {
-            Walking();
+            attackTimer += Time.deltaTime;
         }
     }
 
-    public void Idle()
+    public void LookAtPlayer()
     {
-        idle = true;
-        enemy.Stop();
-        enemy.ChangeAnimationState("Idle");
+        boss.LookAtTarget(_playerTransform);
     }
-
-    public void Walking()
+    public void Attack(int attackType)
     {
-        idle = false;
-        enemy.Move();
-        enemy.CheckEdge();
-        enemy.ChangeAnimationState("Walking");
-    }
-
-    public IEnumerator IdleTimer(float time)
-    {
-        yield return new WaitForSeconds(time);
-        if (idle)
+        if (attackType == 0)
         {
-            idle = false;
-            enemy.StartCoroutine(IdleTimer(Random.Range(4f, 8f)));
+            Debug.Log("Attack 1");
+            boss.ChangeAnimationState("Attack1");
+            Shoot(boss.point1);
         }
-        else
+        else if (attackType == 1)
         {
-            idle = true;
-            enemy.StartCoroutine(IdleTimer(Random.Range(2f, 4f)));
+            Debug.Log("Attack 2");
+            boss.ChangeAnimationState("Attack2");
+            Shoot(boss.point2);
         }
+        else if (attackType == 2)
+        {
+            Debug.Log("Attack 3");
+            boss.ChangeAnimationState("Attack3");
+            Shoot(boss.point3);
+        }
+    }
+
+    public void Shoot(Transform point)
+    {
+        Rigidbody2D bullet = GameObject.Instantiate(boss.bulletPrefab, point.position, Quaternion.identity).GetComponent<Rigidbody2D>();
+        bullet.velocity = new Vector2(boss.direction * boss.bulletSpeed, 0);
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        enemy.StopAllCoroutines();
-        Idle();
     }
 }

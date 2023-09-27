@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        slider = GetComponentInChildren<Slider>();
+        slider = GetComponent<Slider>();
     }
 
     public void SetHealth(float health)
