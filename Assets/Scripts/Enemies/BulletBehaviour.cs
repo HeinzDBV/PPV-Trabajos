@@ -14,21 +14,18 @@ public class BulletBehaviour : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
     }
 
-    private void Update()
-    {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, LayerMask.GetMask("Player"));
-        if (hitInfo.collider != null)
-        {
-            if (hitInfo.collider.CompareTag("Player"))
-            {
-                hitInfo.collider.GetComponent<IDamageable>().Damage(damage);
-                DestroyProjectile();
-            }
-        }
-    }
-
     void DestroyProjectile()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("a");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IDamageable>().Damage(damage);
+            DestroyProjectile();
+        }
     }
 }
