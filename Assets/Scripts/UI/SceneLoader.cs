@@ -10,8 +10,9 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadScene()
     {
-        SceneManager.LoadScene("Level 1");
         Time.timeScale = 1f;
+        SceneManager.LoadScene("Level 1");
+        
     }
     public void Exit()
     {
