@@ -23,6 +23,12 @@ public class IdleBossState : EnemyState
 
     public override void FrameUpdate()
     {
+        LookAtPlayer();
+
+        if (!(boss.animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) && boss.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            boss.ChangeAnimationState("Idle");
+        }
 
         if (attackTimer > attackCooldown)
         {
@@ -40,29 +46,30 @@ public class IdleBossState : EnemyState
     {
         boss.LookAtTarget(_playerTransform);
     }
+
     public void Attack(int attackType)
     {
         if (attackType == 0)
         {
             Debug.Log("Attack 1");
             boss.ChangeAnimationState("Attack1");
-            Shoot(boss.point1);
+            Shoot(boss.point1, attackType);
         }
         else if (attackType == 1)
         {
             Debug.Log("Attack 2");
             boss.ChangeAnimationState("Attack2");
-            Shoot(boss.point2);
+            Shoot(boss.point2, attackType);
         }
         else if (attackType == 2)
         {
             Debug.Log("Attack 3");
             boss.ChangeAnimationState("Attack3");
-            Shoot(boss.point3);
+            Shoot(boss.point3, attackType);
         }
     }
 
-    public void Shoot(Transform point)
+    public void Shoot(Transform point, int attackType)
     {
         Rigidbody2D bullet = GameObject.Instantiate(boss.bulletPrefab, point.position, Quaternion.identity).GetComponent<Rigidbody2D>();
         bullet.velocity = new Vector2(boss.direction * boss.bulletSpeed, 0);

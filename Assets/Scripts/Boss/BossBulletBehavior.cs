@@ -6,26 +6,24 @@ public class BossBulletBehavior : MonoBehaviour
 {
     public float speed = 10f;
     public float damage = 10f;
-    public float lifeTime = 5f;
+    public float lifeTime = 3f;
     public float distance = 10f;
 
     private void Start()
     {
         Invoke("DestroyProjectile", lifeTime);
-        Debug.Log("Bullet created");
     }
 
     void DestroyProjectile()
     {
+        SplashFire();
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit: " + other.name);
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
         damageable?.Damage(damage);
-        SplashFire();
         DestroyProjectile();
     }
 
