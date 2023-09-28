@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class HurtBossState : EnemyState
 {
-    public HurtBossState(BossController enemy, EnemySM stateMachine) : base(enemy, stateMachine)
+    public HurtBossState(BossController boss, EnemySM stateMachine) : base(boss, stateMachine)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        enemy.ChangeAnimationState("Hurt");
+        boss.ChangeAnimationState("Hurt");
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (boss.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            stateMachine.ChangeState(enemy.IdleState);
+            stateMachine.ChangeState(boss.IdleState);
         }
     }
 

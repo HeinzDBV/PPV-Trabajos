@@ -12,6 +12,7 @@ public class BossBulletBehavior : MonoBehaviour
     private void Start()
     {
         Invoke("DestroyProjectile", lifeTime);
+        Debug.Log("Bullet created");
     }
 
     void DestroyProjectile()
