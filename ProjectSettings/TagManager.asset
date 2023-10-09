@@ -11,11 +11,13 @@ TagManager:
   - Deadground
   - Enemy
   - Deadtrigger
+  - NormalNPC
+  - VisualCue
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - VisualCue
   - Water
   - UI
   - Background
@@ -60,9 +62,15 @@ TagManager:
   - name: Props
     uniqueID: 2505788067
     locked: 0
+  - name: Enemies
+    uniqueID: 2945308879
+    locked: 0
   - name: Player
     uniqueID: 2522014059
     locked: 0
   - name: Walls
     uniqueID: 3543179485
+    locked: 0
+  - name: UI
+    uniqueID: 322960117
     locked: 0
