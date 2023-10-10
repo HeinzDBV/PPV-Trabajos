@@ -6,6 +6,8 @@ public class NinoController : MonoBehaviour
 {
     public float moveSpeed = 1.0f; // Velocidad de movimiento del NPC.
     public float moveDistance = 2.0f; // Distancia máxima que el NPC recorrerá en cada dirección.
+    public Transform player;
+    public float distancia;
 
     private bool isWalking = false; // Indica si el NPC está caminando.
     private Vector3 originalPosition; // Posición original del NPC.
@@ -20,7 +22,8 @@ public class NinoController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isWalking)
+        distancia = (transform.position - player.position).magnitude;
+        if (Input.GetKeyDown(KeyCode.Space) && distancia<=3f)
         {
             // El jugador presionó la tecla Espacio, detiene al NPC.
             StopCoroutine(WalkInDirections());
