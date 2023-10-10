@@ -23,9 +23,9 @@ public class NinoController : MonoBehaviour
     void Update()
     {
         distancia = (transform.position - player.position).magnitude;
-        if (Input.GetKeyDown(KeyCode.Space) && distancia<=3f)
+        if (Input.GetKeyDown(KeyCode.E) && distancia<=3f)
         {
-            // El jugador presionó la tecla Espacio, detiene al NPC.
+            // El jugador presionó la tecla E, detiene al NPC.
             StopCoroutine(WalkInDirections());
             isWalking = false;
         }
