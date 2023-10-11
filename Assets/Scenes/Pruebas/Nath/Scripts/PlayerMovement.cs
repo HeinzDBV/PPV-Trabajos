@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
             moveDir.y * Speed.z
         );
 
-        // Comprobar si el jugador está en el suelo
         isGrounded = CheckGrounded();
 
         if (isGrounded && playerInput.actions["Jump"].triggered)
@@ -64,10 +63,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Esta función verifica si el jugador está en el suelo usando un Raycast hacia abajo
     private bool CheckGrounded()
     {
-        float raycastDistance = 1f; // Ajusta la distancia del Raycast según tus necesidades
+        float raycastDistance = 1f;
 
         if (Physics.Raycast(transform.position, Vector3.down, raycastDistance, 1 << LayerMask.NameToLayer("Ground")))
         {
