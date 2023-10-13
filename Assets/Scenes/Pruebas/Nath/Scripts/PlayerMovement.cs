@@ -35,13 +35,13 @@ public class PlayerMovement : MonoBehaviour
         );
 
         //isGrounded = CheckGrounded();
-
+        isGrounded = CheckGrounded();
+        UpdateAnimation();
         if (isGrounded && playerInput.actions["Jump"].triggered)
         {
             Jump();
         }
-        isGrounded = CheckGrounded(); 
-        UpdateAnimation();
+        
     }
 
     private void Jump()
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("salte");
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         animator.SetBool("IsJumping", true);
+        
     }
 
 
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             animator.SetBool("IsJumping", false);
+            Debug.Log("ya no salte");
         }
 
         if (Mathf.Abs(moveDir.x) > Mathf.Epsilon || Mathf.Abs(moveDir.y) > Mathf.Epsilon)
@@ -74,10 +76,12 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckGrounded()
     {
         float raycastDistance = 0.6f;
-
-        if (Physics.Raycast(transform.position, Vector3.down, raycastDistance, 1 << LayerMask.NameToLayer("Ground")))
+        if (rb.velocity.y <= 0f)
         {
-            return true;
+            if (Physics.Raycast(transform.position, Vector3.down, raycastDistance, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                return true;
+            }
         }
 
         return false;
