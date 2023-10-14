@@ -57,9 +57,6 @@ TagManager:
   - name: Back Decos
     uniqueID: 1520373877
     locked: 0
-  - name: Platforms
-    uniqueID: 4102751119
-    locked: 0
   - name: Props
     uniqueID: 2505788067
     locked: 0
@@ -68,6 +65,9 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 2945308879
+    locked: 0
+  - name: Front Decos
+    uniqueID: 4102751119
     locked: 0
   - name: UI
     uniqueID: 322960117
