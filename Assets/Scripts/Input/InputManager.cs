@@ -13,7 +13,6 @@ public class InputManager : MonoBehaviour
     private bool jumpPressed = false;
     private bool interactPressed = false;
     private bool submitPressed = false;
-    private bool runPressed = false;
 
     private static InputManager instance;
 
@@ -79,17 +78,6 @@ public class InputManager : MonoBehaviour
         } 
     }
 
-    public void RunPressed(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            runPressed = true;
-        }
-        else if (context.canceled)
-        {
-            runPressed = false;
-        }
-    }
 
     public Vector3 GetMoveDirection() 
     {
@@ -114,12 +102,6 @@ public class InputManager : MonoBehaviour
         return result;
     }
 
-    public bool GetRunPressed() 
-    {
-        bool result = runPressed;
-        runPressed = false;
-        return result;
-    }
 
 
 

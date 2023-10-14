@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 Speed = new Vector3(4f, 0f, 4f);
     [SerializeField]
     private float jumpForce = 5.0f;
-
     private Rigidbody rb;
     private Animator animator;
     private PlayerInput playerInput;
@@ -24,29 +23,43 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update()
-    {
-        moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-
-        moveDir.Normalize();
-        rb.velocity = new Vector3(
-            moveDir.x * Speed.x,
-            rb.velocity.y,
-            moveDir.y * Speed.z
-        );
-
-        //isGrounded = CheckGrounded();
-        isGrounded = CheckGrounded();
-        UpdateAnimation();
-        if (isGrounded && playerInput.actions["Jump"].triggered)
+    {   
+        if (DialogueManager.GetInstance().dialogueIsPlaying)
         {
-            Jump();
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsJumping", false);
+            return;
         }
+        else
+        {
+            Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDir = new Vector2(moveDirection.x, moveDirection.z); 
+            // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
+
+            moveDir.Normalize();
+            rb.velocity = new Vector3
+            (
+                moveDir.x * Speed.x,
+                rb.velocity.y,
+                moveDir.y * Speed.z
+            );
+
+            //isGrounded = CheckGrounded();
+            isGrounded = CheckGrounded();
+            bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
+            UpdateAnimation();
+            if (isGrounded && jumpPressed)
+            {
+                Jump();
+            }
+        }
+
         
+
     }
 
     private void Jump()
     {
-        Debug.Log("salte");
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         animator.SetBool("IsJumping", true);
         
@@ -58,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             animator.SetBool("IsJumping", false);
-            Debug.Log("ya no salte");
         }
 
         if (Mathf.Abs(moveDir.x) > Mathf.Epsilon || Mathf.Abs(moveDir.y) > Mathf.Epsilon)

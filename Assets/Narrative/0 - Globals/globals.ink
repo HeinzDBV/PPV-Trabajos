@@ -1,1 +1,0 @@
-VAR DialogCtr = 0

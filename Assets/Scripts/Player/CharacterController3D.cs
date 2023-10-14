@@ -2,7 +2,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 
@@ -17,7 +16,7 @@ public class CharacterController3D : MonoBehaviour
     public float gravityScale = 20.0f;
     private PlayerInput playerInput;
 
-    private BoxCollider coll;
+    private CapsuleCollider coll;
     private Rigidbody rb;
 
     // Animation
@@ -29,7 +28,7 @@ public class CharacterController3D : MonoBehaviour
 
     private void Awake()
     {
-        coll = GetComponent<BoxCollider>();
+        coll = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         rb.freezeRotation = true; // Prevent rotation due to physics interactions
