@@ -4,7 +4,7 @@ INCLUDE ../globals.ink
 
 
 === main ===
-¿No crees que las flores son hermosas aquí?#speaker:Princesa #portrait:A #layout:Right
+¿No crees que las flores son hermosas aquí?#speaker:Princesa #portrait:Princesa #layout:Right
 
 +[Asentir]
 ¡Lo son! #speaker:Prota #portrait:Default #layout:Left
@@ -15,11 +15,11 @@ INCLUDE ../globals.ink
 ->main3
 
 === main2 ===
-¡Gracias! Desde hace tiempo llevo cuidándolas para que crezcan y alegren nuestro pueblo…#speaker:Princesa #portrait:A #layout:Right
+¡Gracias! Desde hace tiempo llevo cuidándolas para que crezcan y alegren nuestro pueblo…#speaker:Princesa #portrait:Princesa #layout:Right
 -> main4
 
 === main3 ===
-Oh… Está bien, es bueno saberlo, todos los días las riego para que crezcan sanas y fuertes, pero no siempre funciona…#speaker:Princesa #portrait:A #layout:Right
+Oh… Está bien, es bueno saberlo, todos los días las riego para que crezcan sanas y fuertes, pero no siempre funciona…#speaker:Princesa #portrait:Princesa #layout:Right
 -> main4
 
 === main4 ===
@@ -35,13 +35,13 @@ No me suena… #speaker:Prota #portrait:Default #layout:Left
 -> main6
 
 === main5 ===
-Ohh... ya veo... entonces nos vemos. #speaker:Princesa #portrait:A #layout:Right
+Ohh... ya veo... entonces nos vemos. #speaker:Princesa #portrait:Princesa #layout:Right
 ~ guardia += 1 
 ~ princesa += 1 
 -> END
 
 === main6 ===
-En cualquier caso te la contaré… #speaker:Princesa #portrait:A #layout:Right
+En cualquier caso te la contaré… #speaker:Princesa #portrait:Princesa #layout:Right
 Hace mucho tiempo, hubo una bella princesa en estas tierras.
 Ella cantaba y bailaba entre las flores, y todo el mundo quedaba admirado con su belleza.
 Entre ellos, hubo un hombre que se ganó su corazón…
@@ -62,5 +62,5 @@ Es una historia un poco turbia, por eso no hay muchos visitantes por aquí.
 -> END
 
 === final ===
-Espero que algún día sepamos más del pobre alquimista. #speaker:Princesa #portrait:A #layout:Right
+Espero que algún día sepamos más del pobre alquimista. #speaker:Princesa #portrait:Princesa #layout:Right
 -> END
