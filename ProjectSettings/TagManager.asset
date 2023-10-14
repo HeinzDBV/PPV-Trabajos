@@ -13,6 +13,7 @@ TagManager:
   - Deadtrigger
   - NormalNPC
   - VisualCue
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -62,10 +63,10 @@ TagManager:
   - name: Props
     uniqueID: 2505788067
     locked: 0
-  - name: Enemies
+  - name: Characters
     uniqueID: 2945308879
     locked: 0
-  - name: Player
+  - name: 
     uniqueID: 2522014059
     locked: 0
   - name: Walls

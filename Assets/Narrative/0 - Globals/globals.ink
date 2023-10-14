@@ -1,1 +1,1 @@
-VAR pokemon_name = ""
+VAR DialogCtr = 0
