@@ -153,7 +153,7 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
-    private IEnumerator ExitDialogueMode() 
+    public IEnumerator ExitDialogueMode() 
     {
         yield return new WaitForSeconds(0.2f);
 
@@ -168,7 +168,7 @@ public class DialogueManager : MonoBehaviour
         // SetCurrentAudioInfo(defaultAudioInfo.id);
     }
 
-    private void ContinueStory() 
+    public void ContinueStory() 
     {
         if (currentStory.canContinue) 
         {

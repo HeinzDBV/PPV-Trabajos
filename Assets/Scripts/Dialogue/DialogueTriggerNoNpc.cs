@@ -55,9 +55,21 @@ public class DialogueTriggerNoNpc : MonoBehaviour
     //     }
     // }
 
-    public void StartRemote()
+    public void StartDialogueModeRemote()
     {
-        Debug.Log("Iniciar conversación remota");
         DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+    }
+
+    public void ContinueDialogueRemote()
+    {
+        DialogueManager.GetInstance().ContinueStory();
+    }
+
+    public void ExitDialogueModeRemote() 
+    {
+        DialogueManager.GetInstance().ExitDialogueMode();
+
+        // go back to default audio
+        // SetCurrentAudioInfo(defaultAudioInfo.id);
     }
 }
