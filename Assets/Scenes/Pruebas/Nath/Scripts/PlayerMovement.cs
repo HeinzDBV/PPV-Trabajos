@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Vector2 moveDir;
 
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update()
-    {   
+    {
         if (DialogueManager.GetInstance().dialogueIsPlaying)
         {
             animator.SetBool("IsWalking", false);
@@ -33,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDir = new Vector2(moveDirection.x, moveDirection.z); 
+            moveDir = new Vector2(moveDirection.x, moveDirection.z);
             // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
 
             moveDir.Normalize();
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
+
 
     }
 
@@ -62,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         animator.SetBool("IsJumping", true);
-        
+
     }
 
 
@@ -99,5 +102,6 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 }
+
 
 
