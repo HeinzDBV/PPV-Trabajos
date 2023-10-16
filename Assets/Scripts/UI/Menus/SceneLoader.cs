@@ -6,16 +6,11 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Scene");
     }
-    public void LoadScene()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Level 1");
-        
-    }
-    public void Exit()
-    {
-        Application.Quit();
-    }
+
+    // public void Exit()
+    // {
+    //     Application.Quit();
+    // }
 }

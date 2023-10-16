@@ -1,6 +1,5 @@
 INCLUDE ../globals.ink
 
-
 { 
 - guardia <= 5 : -> main 
 - guardia == 6: -> final
