@@ -7,11 +7,11 @@ INCLUDE ../globals.ink
 ¿No crees que las flores son hermosas aquí?#speaker:Princesa #portrait:Princesa #layout:Right
 
 +[Asentir]
-¡Lo son! #speaker:Prota #portrait:Default #layout:Left
+¡Lo son! #speaker:Prota #portrait:Player #layout:Left
 ->main2
 
 +[Discrepar]
-¡No tanto! #speaker:Prota #portrait:Default #layout:Left
+¡No tanto! #speaker:Prota #portrait:Player #layout:Left
 ->main3
 
 === main2 ===
@@ -27,11 +27,11 @@ Veo que eres nuevo por aquí, es extraño, no solemos tener visitantes.
 ¿No has oído la leyenda del pueblo?
 
 +[Si]
-La oí hace mucho tiempo, apenas recuerdo partes. #speaker:Prota #portrait:Default #layout:Left
+La oí hace mucho tiempo, apenas recuerdo partes. #speaker:Prota #portrait:Player #layout:Left
 -> main5
 
 +[No]
-No me suena… #speaker:Prota #portrait:Default #layout:Left
+No me suena… #speaker:Prota #portrait:Player #layout:Left
 -> main6
 
 === main5 ===
@@ -52,7 +52,7 @@ El alquimista hizo todo lo posible para salvarla, experimentó con distintos ele
 La princesa quedó irreconocible, y su chispa se apagó por completo.
 Desde ese entonces, el alquimista huyó a la cima de las montañas, avergonzado por convertir a su amada en un monstruo sin vida.
 +[Wow]
-Wow.#speaker:Prota #portrait:Default #layout:Left
+Wow.#speaker:Prota #portrait:Player #layout:Left
 -> main7
 
 === main7 ===

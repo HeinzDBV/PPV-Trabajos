@@ -4,7 +4,7 @@ INCLUDE ../globals.ink
 
 === main ===
 ¡Guau guau! #speaker:Perrito #portrait:Perrito #layout:Right
-¡Buen chico! #speaker:Prota #portrait:Default #layout:Left
+¡Buen chico! #speaker:Prota #portrait:Player #layout:Left
 ~ guardia += 1 
 ~ perrito += 1 
 -> END

@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private GameObject continueIcon;
+    // [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
@@ -42,7 +42,7 @@ public class DialogueManager : MonoBehaviour
 
     private static DialogueManager instance;
 
-    private bool doorint;
+    public static bool doorint;
 
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
@@ -60,13 +60,13 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
         instance = this;
+        doorint = false; 
 
         dialogueVariables = new DialogueVariables(loadGlobalsJSON);
         inkExternalFunctions = new InkExternalFunctions();
 
         // audioSource = this.gameObject.AddComponent<AudioSource>();
         // currentAudioInfo = defaultAudioInfo;
-        doorint = false;
     }
 
     public static DialogueManager GetInstance() 
@@ -203,7 +203,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = line;
         dialogueText.maxVisibleCharacters = 0;
         // hide items while text is typing
-        continueIcon.SetActive(false);
+        // continueIcon.SetActive(false);
         HideChoices();
 
         canContinueToNextLine = false;
@@ -239,7 +239,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // actions to take after the entire line has finished displaying
-        continueIcon.SetActive(true);
+        // continueIcon.SetActive(true);
         DisplayChoices();
 
         canContinueToNextLine = true;
@@ -337,12 +337,9 @@ public class DialogueManager : MonoBehaviour
                 // case AUDIO_TAG: 
                 //     SetCurrentAudioInfo(tagValue);
                 //     break;
-                case DOOR_TAG:
-                    string textholder = tagValue;
-                    if (textholder == "true")
-                    {
+                case DOOR_TAG:  
+                    if (tagValue == "true")
                         doorint = true;
-                    }
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);

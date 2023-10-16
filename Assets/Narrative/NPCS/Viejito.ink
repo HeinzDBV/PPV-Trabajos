@@ -1,18 +1,18 @@
 INCLUDE ../globals.ink
 
 { viejito == 0 : -> main | -> final }
-Vengo en búsqueda del mago oscuro. #speaker:Prota #portrait:Default #layout:Left
+Vengo en búsqueda del mago oscuro. #speaker:Prota #portrait:Player #layout:Left
 ¿El mago oscuro? ¿Estás seguro de que quieres buscarlo? #speaker:Viejito #portrait:Viejito #layout:Right
 
 === main ===
 ¿Qué tal joven? ¿Qué lo trae por estos lares? #speaker:Viejito #portrait:Viejito #layout:Right
 
 +[Aventuras]
-¡Vengo a buscar aventuras! #speaker:Prota #portrait:Default #layout:Left
+¡Vengo a buscar aventuras! #speaker:Prota #portrait:Player #layout:Left
 ->main2
 
 +[Conquistar]
-¡Quiero conquistar el mundo! #speaker:Prota #portrait:Default #layout:Left
+¡Quiero conquistar el mundo! #speaker:Prota #portrait:Player #layout:Left
 ->main2
 
 === main2 ===
@@ -21,11 +21,11 @@ Pero le aconsejo que vaya a otro pueblo, acá solo encontrará un destino fatal.
 Estoy seguro que ya escuchó del monstruo de la montaña…
 
 +[Espera]
-Disculpa, tengo que seguir con mi viaje... me voy. #speaker:Prota #portrait:Default #layout:Left
+Disculpa, tengo que seguir con mi viaje... me voy. #speaker:Prota #portrait:Player #layout:Left
 ->main3
 
 +[Continua]
-Cuénteme más sobre esa historia... #speaker:Prota #portrait:Default #layout:Left
+Cuénteme más sobre esa historia... #speaker:Prota #portrait:Player #layout:Left
 ->main4
 
 === main3 ===

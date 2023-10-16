@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 public class LayerSorter : MonoBehaviour
 {
     public SpriteRenderer[] sprites;
-    public TilemapRenderer[] tilemaps;
 
     void LateUpdate()
     {
@@ -18,16 +17,6 @@ public class LayerSorter : MonoBehaviour
             sprite.sortingOrder = -z;
             z++;
         }
-
-        var orderedTilemaps = tilemaps.OrderBy(tilemap => tilemap.transform.position.z);
-        var z1 = 0;
-        foreach (var tilemap in orderedTilemaps)
-        {
-            tilemap.sortingOrder = -z1;
-            z++;
-        }
-                
-
 
     }
 }

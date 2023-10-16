@@ -1,6 +1,6 @@
 VAR pokemon_name = ""
 
-VAR guardia = 0
+VAR guardia = 6
 
 VAR princesa = 0
 VAR niño = 0
