@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BossController : MonoBehaviour, IDamageable
 {
@@ -35,6 +36,9 @@ public class BossController : MonoBehaviour, IDamageable
 
     #endregion
 
+    #region Events
+    public static event Action OnBossDeath;
+    #endregion
     void Awake()
     {
         BossSM = new BossSM();
@@ -112,5 +116,6 @@ public class BossController : MonoBehaviour, IDamageable
     public void Die()
     {
         BossSM.ChangeState(DeathState);
+        OnBossDeath?.Invoke();
     }
 }
