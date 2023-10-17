@@ -68,6 +68,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
 
     private void UpdateAnimation()
     {

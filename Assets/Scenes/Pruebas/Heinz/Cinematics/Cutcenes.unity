@@ -1575,7 +1575,6 @@ MonoBehaviour:
   typingSpeed: 0.04
   loadGlobalsJSON: {fileID: 4900000, guid: b59bf4a9338c1d946b28550030f80764, type: 3}
   dialoguePanel: {fileID: 1462166584}
-  continueIcon: {fileID: 1956033911}
   dialogueText: {fileID: 258209110}
   displayNameText: {fileID: 1607573374}
   portraitAnimator: {fileID: 529393983}

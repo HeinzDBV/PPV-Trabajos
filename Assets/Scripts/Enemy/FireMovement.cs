@@ -14,6 +14,8 @@ public class FireMovement : MonoBehaviour
 
     private Rigidbody rb;
     private float timer = 0f;
+    public float damage = 1f;
+    public Transform Player;
 
     private void Awake()
     {
@@ -46,7 +48,12 @@ public class FireMovement : MonoBehaviour
     {
         // Hay una colision
         // TODO: Falta hacerle danho al jugador
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Le hace danho al jugador");
+        }
         Debug.Log("Se destruye");
         FireDestroy();
+
     }
 }
