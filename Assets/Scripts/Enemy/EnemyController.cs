@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     public float CoolDownTime = 1.0f;
     #endregion
 
+    //public int Hit_Points
+
     #region Readonly Properties
     public Rigidbody rb { private set; get; }
     public Animator animator { private set; get; }
