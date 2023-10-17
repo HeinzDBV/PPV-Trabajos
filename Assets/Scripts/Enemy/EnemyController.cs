@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     public float DistanceToFollow = 4f;
     public float DistanceToAttack = 3f;
     public float Speed = 1f;
-    public GameObject prefabStone;
+    public GameObject firePrefab;
     public Transform FirePoint;
     public float CoolDownTime = 1.0f;
     #endregion
@@ -65,8 +65,8 @@ public class EnemyController : MonoBehaviour
 
     public void Fire()
     {
-        GameObject stone = Instantiate(prefabStone, FirePoint.position, Quaternion.identity);
-        stone.GetComponent<FireMovement>().Direction =
+        GameObject fireball = Instantiate(firePrefab, FirePoint.position, Quaternion.identity);
+        fireball.GetComponent<FireMovement>().Direction =
             Player.position - transform.position;
     }
 
