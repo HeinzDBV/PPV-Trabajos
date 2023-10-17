@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187eef24270cf2c43a96c6da47e7fa7d, type: 3}
+  m_Script: {fileID: 11500000, guid: b6453f3a412729c4bbbbb22eae249a03, type: 3}
   m_Name: celeste_high
   m_EditorClassIdentifier: 
   id: celeste_high
@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d846c9f17a937004a9b1b5ec128e686d, type: 3}
   - {fileID: 8300000, guid: 945e0fea845119a428c86e739ef83d55, type: 3}
   - {fileID: 8300000, guid: abf62d3b21b2c0049a52bbc447ad7352, type: 3}
-  - {fileID: 8300000, guid: e5867ea8ec5a47a459f98c7188381b9e, type: 3}
+  - {fileID: 8300000, guid: 8a78e17842fd34b69bcb93d34dac2297, type: 3}
   - {fileID: 8300000, guid: 2e25d240689acdc4aa5acc29c1ca47e1, type: 3}
   frequencyLevel: 4
   minPitch: 0.9
