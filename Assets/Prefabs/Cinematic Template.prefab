@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4618186198940210506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6363075868905032306}
+  - component: {fileID: 6062258596019088601}
+  - component: {fileID: 4746792241545023095}
+  - component: {fileID: 4350789460030146759}
+  m_Layer: 0
+  m_Name: Cinematic Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6363075868905032306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618186198940210506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &6062258596019088601
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618186198940210506}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 7937613221577806642, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: 4340563469064095158, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7674198471596670543, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: 0}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: 0}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: 3740083281208336579, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7020349138076748821, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: 5305933268627124280, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 4350789460030146759}
+  - key: {fileID: -6367358297586466043, guid: e828ba4fa8c5d064ea34985acd06118d, type: 2}
+    value: {fileID: 4350789460030146759}
+  m_ExposedReferences:
+    m_References:
+    - 9018932c20e87df4db476aa189fbd32d: {fileID: 0}
+    - f5e3979b4a4d0f04baed9eda7a5502f2: {fileID: 0}
+--- !u!114 &4746792241545023095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618186198940210506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cc75b1e94f9dd45b9a4361d0edcfd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkJSON: {fileID: 0}
+--- !u!114 &4350789460030146759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618186198940210506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: ef01453b8dbdb4f43b59d633475bf695, type: 2}
+    - {fileID: 11400000, guid: 2af2633526cd74ef4b2dd9727fc5e698, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4746792241545023095}
+          m_TargetAssemblyTypeName: DialogueTriggerNoNpc, Assembly-CSharp
+          m_MethodName: StartDialogueModeRemote
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4746792241545023095}
+          m_TargetAssemblyTypeName: DialogueTriggerNoNpc, Assembly-CSharp
+          m_MethodName: ContinueDialogueRemote
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
