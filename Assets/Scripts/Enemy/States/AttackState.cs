@@ -10,7 +10,8 @@ public class AttackState : State
     {
         // Attack -> Follow
         Transition transitionAttackToFollow = new Transition(
-            isValid: () => {
+            isValid: () =>
+            {
                 float distance = Vector3.Distance(
                     controller.Player.position,
                     controller.transform.position
@@ -24,7 +25,8 @@ public class AttackState : State
                     return false;
                 }
             },
-            getNextState: () => {
+            getNextState: () =>
+            {
                 return new FollowState(controller);
             }
         );
@@ -36,6 +38,8 @@ public class AttackState : State
     public override void OnStart()
     {
         Debug.Log("Estado Attack: Start");
+        controller.animator.SetBool("isAttacking", true);
+
     }
 
     public override void OnUpdate()
@@ -45,6 +49,7 @@ public class AttackState : State
         {
             controller.Fire();
             timer = 0f;
+            controller.animator.SetBool("isAttacking", false);
         }
     }
     public override void OnFinish()

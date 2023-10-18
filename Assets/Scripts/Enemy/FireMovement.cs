@@ -10,12 +10,11 @@ public class FireMovement : MonoBehaviour
     [SerializeField]
     private float Speed = 5f;
     [SerializeField]
-    private float timeToDestroy = 3f;
+    private float timeToDestroy = 5f;
 
     private Rigidbody rb;
     private float timer = 0f;
     public float damage = 1f;
-    public Transform Player;
 
     private void Awake()
     {
@@ -44,16 +43,13 @@ public class FireMovement : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        // Hay una colision
-        // TODO: Falta hacerle danho al jugador
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Le hace danho al jugador");
+            other.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            Debug.Log(other.gameObject.GetComponent<IDamageable>().CurrentHealth);
+            FireDestroy();
         }
-        Debug.Log("Se destruye");
-        FireDestroy();
-
     }
 }
