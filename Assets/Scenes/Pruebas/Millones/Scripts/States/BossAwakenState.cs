@@ -17,6 +17,5 @@ public class BossAwakenState : BossState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        bossSM.ChangeState(boss.IdleState);
     }
 }

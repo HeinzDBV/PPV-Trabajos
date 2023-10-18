@@ -10,6 +10,7 @@ public class BossTriggerAreaBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerHasEntered = true;
+
         }
     }
 
