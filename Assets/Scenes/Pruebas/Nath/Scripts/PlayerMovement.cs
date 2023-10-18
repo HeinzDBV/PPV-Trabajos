@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private Vector3 Speed = new Vector3(4f, 0f, 4f);
@@ -14,17 +14,32 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private PlayerInput playerInput;
     private bool isGrounded;
+    private bool isAttacking;
+    private float attackTimeCounter = 0f;
+    private float attackTime = 0.5f;
+    public float meleeAttackDamage = 3f;
+    public float projectileAttackDamage = 5f;
+    public Vector3 CurrentDirection { get; private set; }
+    public PlayerProyectileBehavior projectilePrefab;
     private Vector2 moveDir;
 
     [SerializeField]
     private AudioSource jumpSoundEffect;
 
+    public float MaxHealth { get; set; }
+    public float CurrentHealth { get; set; }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void Start()
+    {
+        MaxHealth = 100f;
+        CurrentHealth = MaxHealth;
     }
 
     private void Update()
@@ -37,6 +52,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                CurrentDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+            }
+
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDir = new Vector2(moveDirection.x, moveDirection.z);
             // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
@@ -52,12 +72,31 @@ public class PlayerMovement : MonoBehaviour
 
             isGrounded = CheckGrounded();
             bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
-            UpdateAnimation();
-            if (isGrounded && jumpPressed)
+            if (isGrounded)
             {
-                Jump();
-                jumpSoundEffect.Play();
+                if (jumpPressed)
+                {
+                    Jump();
+                    jumpSoundEffect.Play();
+                }
+                else if (InputManager.GetInstance().attackPressed && !isAttacking)
+                {
+                    Attack();
+                    isAttacking = true;
+                }
             }
+
+            if (isAttacking)
+            {
+                attackTimeCounter += Time.deltaTime;
+                if (attackTimeCounter >= attackTime)
+                {
+                    attackTimeCounter = 0;
+                    isAttacking = false;
+                }
+            }
+            Debug.Log("Is Attacking: " + isAttacking);
+            UpdateAnimation();
         }
 
 
@@ -73,7 +112,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        animator.SetTrigger("Attack");
+        if (InputManager.GetInstance().projectileAttack)
+        {
+            ProjectileAttack();
+        }
+        else
+        {
+            MeleeAttack();
+        }
+    }
+
+    public void MeleeAttack()
+    {
+        Debug.Log("Melee Attack");
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.GetComponent<IDamageable>().TakeDamage(meleeAttackDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);
+    }
+
+    public void ProjectileAttack()
+    {
+        Debug.Log("Projectile Attack");
+        PlayerProyectileBehavior projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectile.Initialize(CurrentDirection);
     }
 
     private void UpdateAnimation()
@@ -85,13 +157,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (Mathf.Abs(moveDir.x) > Mathf.Epsilon || Mathf.Abs(moveDir.y) > Mathf.Epsilon)
         {
-            animator.SetBool("IsWalking", true);
+            if (InputManager.GetInstance().attackPressed)
+            {
+                animator.SetBool("IsWalking", false);
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                animator.ResetTrigger("Attack");
+                animator.SetBool("IsWalking", true);
+            }
             animator.SetFloat("Horizontal", moveDir.x);
             animator.SetFloat("Vertical", moveDir.y);
         }
         else
         {
             animator.SetBool("IsWalking", false);
+            if (InputManager.GetInstance().attackPressed)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                animator.ResetTrigger("Attack");
+            }
         }
     }
 
@@ -107,6 +196,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
+        {
+            CurrentHealth = 0;
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Player died");
     }
 }
 

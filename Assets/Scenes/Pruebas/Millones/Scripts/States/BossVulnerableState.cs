@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossVulnerableState : BossState
 {
     private readonly float vulnerableTime;
-    private float vulnerableTimeCounter = 0f;
+    public float vulnerableTimeCounter = 0f;
 
     public BossVulnerableState(BossController boss, BossSM bossSM, BossData bossData) : base(boss, bossSM, bossData)
     {

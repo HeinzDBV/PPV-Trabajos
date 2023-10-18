@@ -15,6 +15,7 @@ public class BossHurtState : BossState
     {
         base.Enter();
         boss.ChangeAnimation("Hurt");
+        boss.IsVulnerable = false;
         Debug.Log("Hurt");
     }
 
@@ -24,8 +25,15 @@ public class BossHurtState : BossState
         hurtTimeCounter += Time.deltaTime;
         if (hurtTimeCounter >= hurtTime)
         {
+            boss.VulnerableState.vulnerableTimeCounter += hurtTimeCounter;
             hurtTimeCounter = 0;
             bossSM.ChangeState(boss.VulnerableState);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        boss.IsVulnerable = true;
     }
 }

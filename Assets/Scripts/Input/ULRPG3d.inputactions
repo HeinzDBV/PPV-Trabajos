@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeAttack",
+                    "type": "Button",
+                    "id": "97b4108b-4387-4209-8e8d-93eccee1b4d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -209,11 +218,22 @@
                 {
                     "name": "",
                     "id": "7cfce616-60e2-42c5-8760-708a75d18d94",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5bcf8ef-82ae-4efe-bfec-1f9102d489c8",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ChangeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

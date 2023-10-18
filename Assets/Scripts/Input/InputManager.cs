@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
     private bool jumpPressed = false;
     private bool interactPressed = false;
     private bool submitPressed = false;
+    public bool attackPressed = false;
+    public bool projectileAttack = false;
 
     private static InputManager instance;
 
@@ -51,6 +53,26 @@ public class InputManager : MonoBehaviour
         else if (context.canceled)
         {
             jumpPressed = false;
+        }
+    }
+
+    public void AttackPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            attackPressed = true;
+        }
+        else if (context.canceled)
+        {
+            attackPressed = false;
+        }
+    }
+
+    public void ChangeAttackPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            projectileAttack = !projectileAttack;
         }
     }
 
