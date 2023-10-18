@@ -16,12 +16,12 @@ public class TimelineTrigger : MonoBehaviour
         }
         
         
-        // StartCoroutine(NoActivar());
+        StartCoroutine(NoActivar());
     }
-    // IEnumerator NoActivar()
-    // {
-    //     yield return new WaitForSeconds(3f);
-    //     Destroy(Collider2);
-    //     Debug.Log("Waited for 3 seconds. Now I can do something.");
-    // }
+    IEnumerator NoActivar()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(Collider2);
+         Debug.Log("Waited for 3 seconds. Now I can do something.");
+    }
 }

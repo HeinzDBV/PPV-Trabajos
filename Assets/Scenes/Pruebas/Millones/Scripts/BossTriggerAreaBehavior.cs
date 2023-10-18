@@ -12,4 +12,9 @@ public class BossTriggerAreaBehavior : MonoBehaviour
             playerHasEntered = true;
         }
     }
+
+    public void DontStartYet()
+    {
+        playerHasEntered = false;
+    }
 }
