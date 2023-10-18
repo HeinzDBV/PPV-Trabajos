@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private Vector2 moveDir;
 
+    [SerializeField]
+    private AudioSource jumpSoundEffect;
 
 
     private void Awake()
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
             moveDir = new Vector2(moveDirection.x, moveDirection.z);
             // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
 
+
             moveDir.Normalize();
             rb.velocity = new Vector3
             (
@@ -47,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
                 moveDir.y * Speed.z
             );
 
-            //isGrounded = CheckGrounded();
             isGrounded = CheckGrounded();
             bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
             UpdateAnimation();
             if (isGrounded && jumpPressed)
             {
                 Jump();
+                jumpSoundEffect.Play();
             }
         }
 
