@@ -31,6 +31,7 @@ public class BossController : MonoBehaviour, IDamageable
     #endregion
 
     #region Other Scripts Variables
+    public BossHealthSlider BossHealthSlider { get; private set; }
 
     public BossTriggerAreaBehavior BossTriggerAreaBehavior { get; private set; }
     public BossShieldBehavior BossShield { get; private set; }
@@ -64,11 +65,15 @@ public class BossController : MonoBehaviour, IDamageable
         RB = GetComponent<Rigidbody>();
         BossTriggerAreaBehavior = GetComponentInChildren<BossTriggerAreaBehavior>();
         BossShield = GetComponentInChildren<BossShieldBehavior>();
+        BossHealthSlider = GetComponentInChildren<BossHealthSlider>();
         Player = GameObject.FindWithTag("Player").transform;
         DeactivateShield();
 
         MaxHealth = bossData.maxHealth;
         CurrentHealth = MaxHealth;
+
+        BossHealthSlider.slider.maxValue = MaxHealth;
+        BossHealthSlider.slider.value = CurrentHealth;
 
         BossSM.Initialize(SleepState);
     }
@@ -127,6 +132,8 @@ public class BossController : MonoBehaviour, IDamageable
         if (!IsVulnerable) return;
 
         CurrentHealth -= damage;
+        BossHealthSlider.slider.value = CurrentHealth;
+
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;

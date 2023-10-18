@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public float projectileAttackDamage = 5f;
     public Vector3 CurrentDirection { get; private set; }
     public PlayerProyectileBehavior projectilePrefab;
+    public GameObject projectileActive;
     private Vector2 moveDir;
 
     [SerializeField]
@@ -75,14 +76,39 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             isGrounded = CheckGrounded();
             bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
             UpdateAnimation();
-            if (isGrounded && jumpPressed)
+            if (isGrounded)
             {
-                Jump();
-                jumpSoundEffect.Play();
+                if (jumpPressed)
+                {
+                    Jump();
+                    jumpSoundEffect.Play();
+                }
+                else if (InputManager.GetInstance().attackPressed && !isAttacking)
+                {
+                    isAttacking = true;
+                    Attack();
+                }
+            }
+
+            if (isAttacking)
+            {
+                attackTimeCounter += Time.deltaTime;
+                if (attackTimeCounter >= attackTime)
+                {
+                    attackTimeCounter = 0;
+                    isAttacking = false;
+                }
+            }
+
+            if (InputManager.GetInstance().projectileAttack)
+            {
+                projectileActive.SetActive(true);
+            }
+            else
+            {
+                projectileActive.SetActive(false);
             }
         }
-
-
 
     }
 
@@ -152,7 +178,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
         if (Mathf.Abs(moveDir.x) > Mathf.Epsilon || Mathf.Abs(moveDir.y) > Mathf.Epsilon)
         {
-            if (InputManager.GetInstance().attackPressed)
+            if (InputManager.GetInstance().attackPressed && !InputManager.GetInstance().projectileAttack)
             {
                 animator.SetBool("IsWalking", false);
                 animator.SetTrigger("Attack");
@@ -170,7 +196,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         {
             animator.SetBool("IsWalking", false);
 
-            if (InputManager.GetInstance().attackPressed)
+            if (InputManager.GetInstance().attackPressed && !InputManager.GetInstance().projectileAttack)
             {
                 animator.SetTrigger("Attack");
             }
