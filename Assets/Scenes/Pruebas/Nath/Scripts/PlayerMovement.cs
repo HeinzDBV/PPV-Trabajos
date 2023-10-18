@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
+    public static event Action<float> OnPlayerHealthChange;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        MaxHealth = 100f;
+        MaxHealth = 12f;
         CurrentHealth = MaxHealth;
     }
 
@@ -232,6 +235,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        OnPlayerHealthChange?.Invoke(CurrentHealth);
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
