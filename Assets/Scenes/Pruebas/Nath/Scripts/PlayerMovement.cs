@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     [SerializeField]
     private AudioSource jumpSoundEffect;
+    [SerializeField]
+    private AudioSource WalkSound;
 
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
@@ -60,49 +62,42 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDir = new Vector2(moveDirection.x, moveDirection.z);
             // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-
-
-            moveDir.Normalize();
+                    moveDir.Normalize();
             rb.velocity = new Vector3
             (
-                moveDir.x * Speed.x,
-                rb.velocity.y,
-                moveDir.y * Speed.z
+            moveDir.x * Speed.x,
+            rb.velocity.y,
+            moveDir.y * Speed.z
             );
+            // WalkSoundStart();
+
 
             isGrounded = CheckGrounded();
             bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
-            if (isGrounded)
-            {
-                if (jumpPressed)
-                {
-                    Jump();
-                    jumpSoundEffect.Play();
-                }
-                else if (InputManager.GetInstance().attackPressed && !isAttacking)
-                {
-                    Attack();
-                    isAttacking = true;
-                }
-            }
-
-            if (isAttacking)
-            {
-                attackTimeCounter += Time.deltaTime;
-                if (attackTimeCounter >= attackTime)
-                {
-                    attackTimeCounter = 0;
-                    isAttacking = false;
-                }
-            }
-            Debug.Log("Is Attacking: " + isAttacking);
             UpdateAnimation();
+            if (isGrounded && jumpPressed)
+            {
+                Jump();
+                jumpSoundEffect.Play();
+            }
         }
 
 
 
     }
 
+    // IEnumerator WalkSoundStart()
+    // {
+    //     while(animator.GetBool("IsWalking") == true)
+    //     {   
+    //         WalkSound.Play();
+    //         yield return new WaitForSeconds(0.7f);
+    //     }
+    //     if(animator.GetBool("IsWalking") == false)
+    //     {
+    //         WalkSound.Stop();
+    //     }
+    // }
     private void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -169,10 +164,12 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             }
             animator.SetFloat("Horizontal", moveDir.x);
             animator.SetFloat("Vertical", moveDir.y);
+            
         }
         else
         {
             animator.SetBool("IsWalking", false);
+
             if (InputManager.GetInstance().attackPressed)
             {
                 animator.SetTrigger("Attack");

@@ -147,8 +147,8 @@ public class DialogueManager : MonoBehaviour
 
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
-        portraitAnimator.Play("Default");
-        layoutAnimator.Play("Right");
+        portraitAnimator.Play("Player");
+        layoutAnimator.Play("Left");
 
         ContinueStory();
     }

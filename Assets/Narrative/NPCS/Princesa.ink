@@ -4,7 +4,7 @@ INCLUDE ../globals.ink
 
 
 === main ===
-¿No crees que las flores son hermosas aquí?#speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+¿No crees que las flores son hermosas aquí?#speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 
 +[Asentir]
 ¡Lo son! #speaker:Prota #portrait:Player #layout:Left #audio:celeste_low
@@ -15,15 +15,15 @@ INCLUDE ../globals.ink
 ->main3
 
 === main2 ===
-¡Gracias! Desde hace tiempo llevo cuidándolas para que crezcan y alegren nuestro pueblo…#speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+¡Gracias! Desde hace tiempo llevo cuidándolas para que crezcan y alegren nuestro pueblo…#speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 -> main4
 
 === main3 ===
-Oh… Está bien, es bueno saberlo, todos los días las riego para que crezcan sanas y fuertes, pero no siempre funciona…#speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+Oh… Está bien, es bueno saberlo, todos los días las riego para que crezcan sanas y fuertes, pero no siempre funciona…#speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 -> main4
 
 === main4 ===
-Veo que eres nuevo por aquí, es extraño, no solemos tener visitantes. #audio:animal_crossing_low
+Veo que eres nuevo por aquí, es extraño, no solemos tener visitantes. #audio:celeste_high
 ¿No has oído la leyenda del pueblo?
 
 +[Si]
@@ -35,13 +35,13 @@ No me suena… #speaker:Prota #portrait:Player #layout:Left #audio:celeste_low
 -> main6
 
 === main5 ===
-Ohh... ya veo... entonces nos vemos. #speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+Ohh... ya veo... entonces nos vemos. #speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 ~ guardia += 1 
 ~ princesa += 1 
 -> END
 
 === main6 ===
-En cualquier caso te la contaré… #speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+En cualquier caso te la contaré… #speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 Hace mucho tiempo, hubo una bella princesa en estas tierras.
 Ella cantaba y bailaba entre las flores, y todo el mundo quedaba admirado con su belleza.
 Entre ellos, hubo un hombre que se ganó su corazón…
@@ -56,11 +56,11 @@ Wow.#speaker:Prota #portrait:Player #layout:Left #audio:celeste_low
 -> main7
 
 === main7 ===
-Es una historia un poco turbia, por eso no hay muchos visitantes por aquí. #speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+Es una historia un poco turbia, por eso no hay muchos visitantes por aquí. #speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 ~ guardia += 1 
 ~ princesa += 1 
 -> END
 
 === final ===
-Espero que algún día sepamos más del pobre alquimista. #speaker:Princesa #portrait:Princesa #layout:Right #audio:animal_crossing_low
+Espero que algún día sepamos más del pobre alquimista. #speaker:Princesa #portrait:Princesa #layout:Right #audio:celeste_high
 -> END
