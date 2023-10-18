@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
+    public Transform SpawnPoint;
 
     public static event Action<float> OnPlayerHealthChange;
 
@@ -235,17 +236,23 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
-        OnPlayerHealthChange?.Invoke(CurrentHealth);
         if (CurrentHealth <= 0)
         {
-            CurrentHealth = 0;
             Die();
+        }
+        else 
+        {
+            OnPlayerHealthChange?.Invoke(CurrentHealth);
         }
     }
 
     public void Die()
     {
         Debug.Log("Player died");
+        transform.position = SpawnPoint.position;
+        CurrentHealth = MaxHealth;
+        Debug.Log(CurrentHealth);
+        OnPlayerHealthChange?.Invoke(CurrentHealth);
     }
 }
 

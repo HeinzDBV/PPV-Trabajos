@@ -58,6 +58,7 @@ public class InputManager : MonoBehaviour
 
     public void AttackPressed(InputAction.CallbackContext context)
     {
+        Debug.Log("Attack pressed");
         if (context.performed)
         {
             attackPressed = true;
@@ -70,6 +71,7 @@ public class InputManager : MonoBehaviour
 
     public void ChangeAttackPressed(InputAction.CallbackContext context)
     {
+        Debug.Log("Change attack pressed");
         if (context.performed)
         {
             projectileAttack = !projectileAttack;

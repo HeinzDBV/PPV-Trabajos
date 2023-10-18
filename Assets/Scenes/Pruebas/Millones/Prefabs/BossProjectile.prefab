@@ -142,9 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 0}
-  timeToDestroy: 2
+  timeToDestroy: 3
   timer: 0
-  damage: 5
+  damage: 2
   speed: 10
   direction: {x: 0, y: 0, z: 0}
   isMoving: 0
