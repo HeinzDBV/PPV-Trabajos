@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
-
+    // public PlayerInput playerInput;
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
 
@@ -67,6 +68,8 @@ public class DialogueManager : MonoBehaviour
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
+
+        // playerInput = GetComponent<PlayerInput>();
     }
 
     public static DialogueManager GetInstance() 
@@ -150,6 +153,9 @@ public class DialogueManager : MonoBehaviour
         portraitAnimator.Play("Player");
         layoutAnimator.Play("Left");
 
+        // playerInput.SwitchCurrentControlScheme("Cinematics");
+        // Debug.Log(playerInput.currentControlScheme);
+
         ContinueStory();
     }
 
@@ -166,6 +172,9 @@ public class DialogueManager : MonoBehaviour
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
+
+        // playerInput.SwitchCurrentControlScheme("Player");
+        // Debug.Log(playerInput.currentControlScheme);
     }
 
     public void ContinueStory() 

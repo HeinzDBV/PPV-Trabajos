@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDir = new Vector2(moveDirection.x, moveDirection.z);
             // moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
-                    moveDir.Normalize();
+            moveDir.Normalize();
             rb.velocity = new Vector3
             (
             moveDir.x * Speed.x,
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             UpdateAnimation();
             if (isGrounded)
             {
-                if (jumpPressed)
+                if (jumpPressed && isGrounded == true)
                 {
                     Jump();
                     jumpSoundEffect.Play();
@@ -126,8 +126,16 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     // }
     private void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        animator.SetBool("IsJumping", true);
+        if (isGrounded == false)
+        {
+            animator.SetBool("IsJumping", false);
+
+        }
+        else if(isGrounded == true)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetBool("IsJumping", true);
+        }
 
     }
 

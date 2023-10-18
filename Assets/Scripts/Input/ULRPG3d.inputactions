@@ -238,6 +238,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cinematics",
+            "id": "a285497e-2734-473f-8717-50abda1c12a0",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "30a50b59-8543-4495-a0f8-477559e6dac4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "982baf0c-4f3f-4d5c-a48e-5f1a88763934",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
