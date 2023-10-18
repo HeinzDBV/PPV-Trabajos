@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
     {
         GameObject fireball = Instantiate(firePrefab, FirePoint.position, Quaternion.identity);
         fireball.GetComponent<FireMovement>().Direction =
-            Player.position - transform.position;
+            Player.position - FirePoint.position;
     }
 
 }

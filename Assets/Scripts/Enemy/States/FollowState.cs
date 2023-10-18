@@ -66,10 +66,12 @@ public class FollowState : State
         controller.animator.SetFloat("Horizontal", dir.x);
         controller.animator.SetFloat("Vertical", dir.z);
         controller.rb.velocity = dir * controller.Speed;
+        controller.animator.SetBool("isWalking", true);
 
     }
     public override void OnFinish()
     {
         Debug.Log("Estado Follow: FInish");
+        controller.animator.SetBool("isWalking", false);
     }
 }
