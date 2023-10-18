@@ -14,27 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: celeste_low
   dialogueTypingSoundClips:
-  - {fileID: 8300000, guid: 6c0d30724da7d334d913d2e5844416b0, type: 3}
-  - {fileID: 8300000, guid: 9062016096b9e394f9623031c8123ced, type: 3}
-  - {fileID: 8300000, guid: ff2d1621cb14ed0499708e34fea720ac, type: 3}
-  - {fileID: 8300000, guid: c7a502130ef61ac4c9de2c2d4af73b6d, type: 3}
-  - {fileID: 8300000, guid: 1f82ff2f7b32bdd4a82f91756ab1a79a, type: 3}
-  - {fileID: 8300000, guid: 2743542352c400746b605532f6923e6c, type: 3}
-  - {fileID: 8300000, guid: eb21540d98ff0fa4fa8d3a81a2c55fea, type: 3}
-  - {fileID: 8300000, guid: cf7a5165c476de743a9a04e3222de4d7, type: 3}
-  - {fileID: 8300000, guid: 6c76d4ff005763d4cb43c8fb46b23c85, type: 3}
-  - {fileID: 8300000, guid: f6ee8ac0c876ec747a26661fe76641cc, type: 3}
-  - {fileID: 8300000, guid: ccdcab00a200d4841b028736339dc8c4, type: 3}
-  - {fileID: 8300000, guid: 3a77ffcb44a04304d9ac5e7c9cb0ffe0, type: 3}
-  - {fileID: 8300000, guid: b659461de1c836d4f95eb8bd66102766, type: 3}
-  - {fileID: 8300000, guid: 3bf9d660a0cfcaf4493c4c04c5a8bb7d, type: 3}
-  - {fileID: 8300000, guid: b06e8f3935c66d44b829dd56e6ed850f, type: 3}
-  - {fileID: 8300000, guid: 54033e8488875fb4192ef93b444c4ec8, type: 3}
-  - {fileID: 8300000, guid: 5d4b518f39ea5f4418501cc924be1d67, type: 3}
-  - {fileID: 8300000, guid: 7f27b4ebf398458448cd6ae350140beb, type: 3}
-  - {fileID: 8300000, guid: f03ad4f2cbb40a7499f1c0844345241b, type: 3}
-  - {fileID: 8300000, guid: dfda4a2afd92e1e438b11e8a91233e57, type: 3}
-  - {fileID: 8300000, guid: 5d6cae4bcf9e851408f3ffa9c4d1b6e4, type: 3}
+  - {fileID: 8300000, guid: f84b88ee330cd314fa3020ef2aa0b258, type: 3}
+  - {fileID: 8300000, guid: e969b3c75e01bf845b9763cab40339fb, type: 3}
+  - {fileID: 8300000, guid: 584cbc930eff7304e8a097bf7befb8cc, type: 3}
+  - {fileID: 8300000, guid: c919e732e41f1dd42be2f46beec50116, type: 3}
+  - {fileID: 8300000, guid: a1642c8e120107746ba97c91f47a79bd, type: 3}
+  - {fileID: 8300000, guid: 709b15887b7eace42be587f6c459eb76, type: 3}
+  - {fileID: 8300000, guid: 5afa88659c2c0e84ea6286eff891ec81, type: 3}
+  - {fileID: 8300000, guid: 505b4c943328d0444966c037b155db07, type: 3}
+  - {fileID: 8300000, guid: 768d215101a317444938632822da972c, type: 3}
+  - {fileID: 8300000, guid: f345d2a1f85d7484a801317c34743304, type: 3}
+  - {fileID: 8300000, guid: 0f33eb63814a8fe4fa32ee056cd9be5a, type: 3}
+  - {fileID: 8300000, guid: ff8a81c5e124cad458380a2ec86a4624, type: 3}
+  - {fileID: 8300000, guid: 754794731f9222949aedef18096d0ca1, type: 3}
+  - {fileID: 8300000, guid: c7979e8f83092f647b382507db9617eb, type: 3}
+  - {fileID: 8300000, guid: 5da2e5ba0063ed24182770375c5d73dc, type: 3}
+  - {fileID: 8300000, guid: 0f7d29829c1e1894d9975b62e549cc37, type: 3}
+  - {fileID: 8300000, guid: 5a7e1f24398139649a63760d4f2c068e, type: 3}
+  - {fileID: 8300000, guid: 2558bbb10583b5e4393b2ef557043f8b, type: 3}
+  - {fileID: 8300000, guid: c4cf53b1d3c512a4db6d9bcbbe02e37d, type: 3}
+  - {fileID: 8300000, guid: 871d3cacf695e5341bf82f63e203fc7e, type: 3}
+  - {fileID: 8300000, guid: 68fb747098da63f458149cf0bc95593a, type: 3}
   frequencyLevel: 4
   minPitch: 0.9
   maxPitch: 1.1
