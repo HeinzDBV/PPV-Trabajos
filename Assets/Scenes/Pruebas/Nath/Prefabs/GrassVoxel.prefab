@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5485939105425160822}
   - component: {fileID: 2262905798076286571}
   - component: {fileID: 4441733059130716327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top
   m_TagString: Platforms
   m_Icon: {fileID: 0}
