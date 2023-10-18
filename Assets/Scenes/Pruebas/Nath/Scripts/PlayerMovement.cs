@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     private Animator animator;
     private PlayerInput playerInput;
     private bool isGrounded;
-    private bool isAttacking;
+    private bool isAttacking = false;
     private float attackTimeCounter = 0f;
     private float attackTime = 0.5f;
     public float meleeAttackDamage = 3f;
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             UpdateAnimation();
             if (isGrounded)
             {
-                if (jumpPressed && isGrounded == true)
+                if (jumpPressed)
                 {
                     Jump();
                     jumpSoundEffect.Play();
