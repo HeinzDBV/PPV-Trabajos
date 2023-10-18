@@ -13,6 +13,8 @@ public class BossController : MonoBehaviour, IDamageable
     public BossHurtState HurtState { get; private set; }
     public BossIdleState IdleState { get; private set; }
     public BossDeathState DeathState { get; private set; }
+    public BossAttackState AttackState { get; private set; }
+    public BossVulnerableState VulnerableState { get; private set; }
 
     [SerializeField] private BossData bossData;
 
@@ -22,8 +24,8 @@ public class BossController : MonoBehaviour, IDamageable
 
     public Animator Animator { get; private set; }
     public Rigidbody RB { get; private set; }
-    public Vector2 CurrentVelocity { get; private set; }
-    public Vector2 CurrentDirection { get; private set; }
+    public Vector3 CurrentVelocity { get; private set; }
+    public Vector3 CurrentDirection { get; private set; }
     public Transform Player { get; private set; }
 
     #endregion
@@ -31,8 +33,11 @@ public class BossController : MonoBehaviour, IDamageable
     #region Other Scripts Variables
 
     public BossTriggerAreaBehavior BossTriggerAreaBehavior { get; private set; }
+    public BossShieldBehavior BossShield { get; private set; }
+    public AttackAreaBehavior AttackArea { get; private set; }
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
+    public bool IsVulnerable { get; set; }
 
     #endregion
 
@@ -48,6 +53,8 @@ public class BossController : MonoBehaviour, IDamageable
         IdleState = new BossIdleState(this, BossSM, bossData);
         HurtState = new BossHurtState(this, BossSM, bossData);
         DeathState = new BossDeathState(this, BossSM, bossData);
+        AttackState = new BossAttackState(this, BossSM, bossData);
+        VulnerableState = new BossVulnerableState(this, BossSM, bossData);
     }
 
     // Start is called before the first frame update
@@ -56,7 +63,9 @@ public class BossController : MonoBehaviour, IDamageable
         Animator = GetComponent<Animator>();
         RB = GetComponent<Rigidbody>();
         BossTriggerAreaBehavior = GetComponentInChildren<BossTriggerAreaBehavior>();
+        BossShield = GetComponentInChildren<BossShieldBehavior>();
         Player = GameObject.FindWithTag("Player").transform;
+        DeactivateShield();
 
         MaxHealth = bossData.maxHealth;
         CurrentHealth = MaxHealth;
@@ -68,6 +77,7 @@ public class BossController : MonoBehaviour, IDamageable
     void Update()
     {
         CurrentVelocity = RB.velocity;
+        LookAtPlayer();
         BossSM.CurrentState.LogicUpdate();
     }
 
@@ -83,12 +93,25 @@ public class BossController : MonoBehaviour, IDamageable
         Animator.Play(aninName);
     }
 
+    public void ActivateShield()
+    {
+        BossShield.ActivateShield();
+        IsVulnerable = false;
+    }
+
+    public void DeactivateShield()
+    {
+        BossShield.DeactivateShield();
+        IsVulnerable = true;
+    }
+
     public void LookAtPlayer()
     {
         Vector3 lookAtPosition = Player.position - transform.position;
         lookAtPosition.y = 0;
         lookAtPosition.Normalize();
-        CurrentDirection = new Vector2(lookAtPosition.x, lookAtPosition.z);
+        CurrentDirection = lookAtPosition;
+        Debug.DrawRay(transform.position, lookAtPosition, Color.red);
 
         Animator.SetFloat("Horizontal", lookAtPosition.x);
         Animator.SetFloat("Vertical", lookAtPosition.z);
@@ -101,6 +124,8 @@ public class BossController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (!IsVulnerable) return;
+
         CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
@@ -117,5 +142,10 @@ public class BossController : MonoBehaviour, IDamageable
     {
         BossSM.ChangeState(DeathState);
         OnBossDeath?.Invoke();
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

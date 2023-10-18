@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BossData
   m_EditorClassIdentifier: 
   maxHealth: 100
-  movementVelocity: 10
+  movementVelocity: 1
+  attackDamage: 10
+  projectile: {fileID: 0}

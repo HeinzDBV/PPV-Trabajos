@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class BossShieldBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool ShieldActive { get; set; }
+
+    public void ActivateShield()
     {
-        
+        gameObject.SetActive(true);
+        ShieldActive = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DeactivateShield()
     {
-        
+        gameObject.SetActive(false);
+        ShieldActive = false;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<IDamageable>().TakeDamage(5);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class BossProjectileBehavior : MonoBehaviour
     public float timer = 0f;
     public float damage = 10f;
     public float speed = 5f;
-    public Vector3 direction = Vector3.back;
+    public Vector3 direction;
     public bool isMoving = false;
 
     // Start is called before the first frame update
@@ -54,7 +54,7 @@ public class BossProjectileBehavior : MonoBehaviour
 
     public void Move()
     {
-        transform.position += speed * Time.deltaTime * direction;
+        transform.position += speed * Time.deltaTime * new Vector3(direction.x, 0, direction.z);
     }
 
     public void Explode()
@@ -67,6 +67,7 @@ public class BossProjectileBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player");
             other.GetComponent<IDamageable>().TakeDamage(damage);
             Explode();
         }

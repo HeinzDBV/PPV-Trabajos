@@ -9,4 +9,5 @@ public class BossData : ScriptableObject
     public float movementVelocity = 10f;
     public float attackDamage = 10f;
     public BossProjectileBehavior projectile;
+    public float vulnerableTime = 5f;
 }
