@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Playables;
 
 public class BossController : MonoBehaviour, IDamageable
 {
@@ -45,6 +46,11 @@ public class BossController : MonoBehaviour, IDamageable
     #region Events
     public static event Action OnBossDeath;
     #endregion
+
+    #region Timeline
+    public PlayableDirector timeline;
+    #endregion
+
     void Awake()
     {
         BossSM = new BossSM();
@@ -154,10 +160,13 @@ public class BossController : MonoBehaviour, IDamageable
     {
         BossSM.ChangeState(DeathState);
         OnBossDeath?.Invoke();
+        timeline.Play();
     }
 
     public void Destroy()
     {
         Destroy(gameObject);
     }
+
+
 }
