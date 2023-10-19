@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossData
   m_EditorClassIdentifier: 
   maxHealth: 100
-  movementVelocity: 1
+  movementVelocity: 3
   attackDamage: 3
   projectile: {fileID: 7664970664173306601, guid: 336f991dd9f6e094a8ea7d818c7d6720, type: 3}
   vulnerableTime: 5

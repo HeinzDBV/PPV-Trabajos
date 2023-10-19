@@ -20,11 +20,5 @@ public class BossDeathState : BossState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        deathTimeCounter += Time.deltaTime;
-        if (deathTimeCounter >= deathTime)
-        {
-            deathTimeCounter = 0;
-            boss.Destroy();
-        }
     }
 }
