@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(CapsuleCollider))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     #region States
     public IdleState IdleState;
@@ -28,6 +28,9 @@ public class EnemyController : MonoBehaviour
     #region Readonly Properties
     public Rigidbody rb { private set; get; }
     public Animator animator { private set; get; }
+    public Enemy1HealthSlider Enemy1HealthSlider { get; private set; }
+    public float MaxHealth { get; set; }
+    public float CurrentHealth { get; set; }
     #endregion
 
 
@@ -47,6 +50,11 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         currentState.OnStart();
+        MaxHealth = 20f;
+        CurrentHealth = MaxHealth;
+        Enemy1HealthSlider = GetComponentInChildren<Enemy1HealthSlider>();
+        Enemy1HealthSlider.slider.maxValue = MaxHealth;
+        Enemy1HealthSlider.slider.value = CurrentHealth;
     }
 
     private void Update()
@@ -72,4 +80,19 @@ public class EnemyController : MonoBehaviour
             Player.position - FirePoint.position;
     }
 
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+        Debug.Log("Enemy1 took " + damage + " damage. Current health: " + CurrentHealth);
+        Enemy1HealthSlider.slider.value = CurrentHealth;
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

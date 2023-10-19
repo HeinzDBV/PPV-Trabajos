@@ -37,7 +37,7 @@ public class PlayerProyectileBehavior : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<BossController>().TakeDamage(damage);
+            other.GetComponent<IDamageable>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }
