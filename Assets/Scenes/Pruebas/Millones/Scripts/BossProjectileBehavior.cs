@@ -7,7 +7,7 @@ public class BossProjectileBehavior : MonoBehaviour
     public Animator Animator;
     public float timeToDestroy = 2f;
     public float timer = 0f;
-    public float damage = 2f;
+    public float damage = 1f;
     public float speed = 5f;
     public Vector3 direction;
     public bool isMoving = false;

@@ -78,6 +78,11 @@ public class BossController : MonoBehaviour, IDamageable
         BossSM.Initialize(SleepState);
     }
 
+    public void ChangeToIdle()
+    {
+        BossSM.ChangeState(IdleState);
+    }
+
     // Update is called once per frame
     void Update()
     {
