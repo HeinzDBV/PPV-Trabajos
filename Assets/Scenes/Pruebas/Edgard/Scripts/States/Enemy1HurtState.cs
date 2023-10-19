@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy1HurtState : Enemy1State
 {
     public float hurtTime = 1f;
-    private float hurtTimeCounter = 0f;
+    // private float hurtTimeCounter = 0f;
 
     public Enemy1HurtState(Enemy1Controller Enemy1, Enemy1SM Enemy1SM, Enemy1Data Enemy1Data) : base(Enemy1, Enemy1SM, Enemy1Data)
     {
